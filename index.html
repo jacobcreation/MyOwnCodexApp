@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codex GUI</title>
+    <link rel="stylesheet" href="./node_modules/@xterm/xterm/css/xterm.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="explorer">
+        <header class="pane-header">
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1>Codex GUI</h1>
+          </div>
+          <button id="openWorkspaceButton" class="icon-button" title="Open folder">...</button>
+        </header>
+        <div id="workspacePath" class="workspace-path"></div>
+        <div class="explorer-actions">
+          <button id="newFileButton">New File</button>
+          <button id="newFolderButton">New Folder</button>
+        </div>
+        <nav id="fileTree" class="file-tree" aria-label="File explorer"></nav>
+      </aside>
+
+      <main class="workspace">
+        <section class="editor-panel">
+          <header class="pane-header editor-header">
+            <div>
+              <p class="eyebrow">Editor</p>
+              <h2 id="activeFileName">No file selected</h2>
+            </div>
+            <div class="editor-actions">
+              <span id="fileState" class="file-state">Ready</span>
+              <button id="refreshButton" title="Refresh explorer">Refresh</button>
+              <button id="saveButton" class="primary" disabled>Save</button>
+            </div>
+          </header>
+          <textarea
+            id="editor"
+            spellcheck="false"
+            placeholder="Select a file from the explorer or create a new one."
+          ></textarea>
+        </section>
+
+        <section class="terminal-panel">
+          <header class="pane-header terminal-header">
+            <div>
+              <p class="eyebrow">Terminal</p>
+              <h2 id="terminalTitle">Shell</h2>
+            </div>
+            <div class="terminal-actions">
+              <span id="terminalStatus" class="terminal-status">Connecting</span>
+              <button id="restartTerminalButton">Restart</button>
+            </div>
+          </header>
+          <div class="terminal-toolbar">
+            <button id="terminalClearButton" type="button">Clear</button>
+            <button id="terminalCtrlCButton" type="button">Ctrl+C</button>
+            <button id="terminalFocusButton" type="button">Focus</button>
+          </div>
+          <div id="terminalSurface" class="terminal-surface"></div>
+        </section>
+      </main>
+
+      <aside class="chat">
+        <header class="pane-header">
+          <div>
+            <p class="eyebrow">Agent</p>
+            <h2>Codex Chat</h2>
+          </div>
+          <button id="stopChatButton" disabled>Stop</button>
+        </header>
+        <div id="chatLog" class="chat-log" aria-live="polite"></div>
+        <form id="chatForm" class="chat-form">
+          <textarea
+            id="chatInput"
+            rows="4"
+            placeholder="Ask Codex to inspect, edit, or explain this workspace."
+          ></textarea>
+          <button id="sendChatButton" class="primary" type="submit">Send</button>
+        </form>
+      </aside>
+    </div>
+
+    <script src="./node_modules/@xterm/xterm/lib/xterm.js"></script>
+    <script src="./node_modules/@xterm/addon-fit/lib/addon-fit.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
